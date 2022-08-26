@@ -1,64 +1,45 @@
 import random
 
+import Game
 
-class Card:
-    def __init__(self, value):
-        self.value = value
-
-    def __str__(self):
-        return f"{self.value}"
-
-    def __repr__(self):
-        return f"{self.value}"
+# set random seed for reproducibility
+random.seed(0)
 
 
-class Deck:
-    def __init__(self):
-        self.cards = []
-        for i in range(2, 100):
-            self.cards.append(Card(i))
-
-    def rm_card(self):
-        if len(self.cards) > 0:
-            return self.cards.pop()
-
-    def __len__(self):
-        return len(self.cards)
-
-    def shuffle(self):
-        random.shuffle(self.cards)
+# constants for stack types
 
 
-class Player:
-    def __init__(self, name):
-        self.card = []
-        self.name = name
+def main():
+    # create a new game
+    game = Game.GameState()
+    # give every player 6 cards
+    for player in game.players:
+        for _ in range(6):
+            player.hand.append(game.board.draw_pile.pop())
+    # print the board
+    game.print_board()
+    # print the players
+    # for player in game.players:
+    #     print(player, player.hand)
 
-    def draw(self, deck):
-        self.card.append(deck.rm_card())
-        return self
+    # Game loop
+    while True:
+        # get the current player
+        player = game.players[game.current_player]
+        # get the player's move
+        # print the hand of the player
+        print(player, player.hand)
+        move = (int(input(f"{player.name} choose Hand Card: ")), int(
+            input("Choose Stack: ")))
 
-    def show_hand(self):
-        for card in self.card:
-            print(card)
-        return self
+        # execute the move
+        game.execute_move(move, player)
+
+        # print the board
+        game.print_board()
+        # switch to the next player
+        game.current_player = (game.current_player + 1) % len(game.players)
 
 
-class Game:
-    def __init__(self):
-        self.deck = Deck()
-        self.deck.shuffle()
-        self.players = []
-        self.player_count = 4
-        # TODO: create player objects and add them to the player list
-
-
-# Testing:
-game = Game()
-
-try:
-    game.players[0].show_hand()
-    # print length of deck
-    print("Cards Left: ", len(game.deck))
-except:
-    print("No players")
+if __name__ == "__main__":
+    main()
