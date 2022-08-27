@@ -1,2 +1,5 @@
 setuptools==65.3.0
 wheel==0.37.1
+
+# test dependencies
+pytest~=7.1.2

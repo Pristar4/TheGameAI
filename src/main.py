@@ -1,10 +1,5 @@
-import random
 
 import Game
-
-# set random seed for reproducibility
-random.seed(0)
-
 
 # constants for stack types
 
@@ -12,15 +7,10 @@ random.seed(0)
 def main():
     # create a new game
     game = Game.GameState()
-    # give every player 6 cards
-    for player in game.players:
-        for _ in range(6):
-            player.hand.append(game.board.draw_pile.pop())
+    game.init()
+
     # print the board
     game.print_board()
-    # print the players
-    # for player in game.players:
-    #     print(player, player.hand)
 
     # Game loop
     while True:

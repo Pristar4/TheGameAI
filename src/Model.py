@@ -7,10 +7,19 @@ STACK_TYPE_DOWN = 1
 class Card:
     def __init__(self, value):
         self.value = value
+        if value not in range(1, 101):
+            raise ValueError('valid value 1..100')
 
+    def isValid(self):
+        return self.value in range(2, 100)
+
+    def __eq__(self, other):
+        if isinstance(other, self.__class__):
+            return self.value == other.value
+        else:
+            return False
     def __str__(self):
         return f"{self.value}"
-
     def __repr__(self):
         return f"{self.value}"
 
@@ -20,9 +29,6 @@ class CardPile:
         self.stack = []
         for i in range(2, 100):
             self.stack.append(Card(i))
-
-    def push(self, card):
-        self.stack.append(card)
 
     def pop(self):
         return self.stack.pop()
@@ -47,6 +53,9 @@ class DiscardPile:
 
     def top(self):
         return self.stack[-1]
+
+    def isUp(self):
+        return self.constraint == STACK_TYPE_UP
 
     def __len__(self):
         return len(self.stack)
@@ -76,3 +85,22 @@ class Board:
 
     def __repr__(self):
         return f"{self.stacks}"
+
+
+class Hand:
+    def __init__(self):
+        self.list = []
+
+    def append(self, card):
+        self.list.append(card)
+
+    def remove(self, card):
+        self.list.remove(card)
+
+    def __len__(self):
+        return len(self.list)
+
+    def __repr__(self):
+        return f"{self.list}"
+
+
