@@ -24,7 +24,8 @@ class GameState:
 
         # reset players
         for player in self.players:
-            player.hand = []
+            # empty hand
+            player.hand = Hand()
             self.drawHand(player)
 
         self.current_player = 0
@@ -45,8 +46,7 @@ class GameState:
 
     def print_board(self):
         # print the top card of every stack in the same line separated by a space
-        print(" | ".join([str(stack.top()) for stack in self.board.stacks]))
-        pass
+        print("Board :",  " | ".join([str(stack.top()) for stack in self.board.stacks]))
 
 
 class Player:
@@ -55,13 +55,13 @@ class Player:
         self.hand = Hand()
 
     def __repr__(self):
-        return f"{self.name} : {self.hand}"
+        return f"{self.name}"
 
 
 class Move:
-    def __init__(self, player, cardOrValue, pile):
+    def __init__(self, player, cardOrValue, stack):
         self.player = player
-        self.pile = pile
+        self.pile = stack
         if type(cardOrValue) == Card:
             self.card = cardOrValue
         else:

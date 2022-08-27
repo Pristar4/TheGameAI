@@ -1,7 +1,14 @@
 import random
 
-STACK_TYPE_UP = 0
-STACK_TYPE_DOWN = 1
+# discard stack types
+STACK_TYPE_ASCENDING = 0
+STACK_TYPE_DESCENDING = 1
+
+# discard stack indices
+STACK_IDX_LEFT_ASC = 0
+STACK_IDX_RIGHT_ASC = 1
+STACK_IDX_LEFT_DESC = 2
+STACK_IDX_RIGHT_DESC = 3
 
 
 class Card:
@@ -56,8 +63,11 @@ class DiscardPile:
     def top(self):
         return self.stack[-1]
 
-    def isUp(self):
-        return self.constraint == STACK_TYPE_UP
+    def isAscending(self):
+        return self.constraint == STACK_TYPE_ASCENDING
+
+    def isDescending(self):
+        return self.constraint == STACK_TYPE_DESCENDING
 
     def __len__(self):
         return len(self.stack)
@@ -66,6 +76,8 @@ class DiscardPile:
         return f"{self.stack}"
 
 
+# the board has 4 discards stacks in following order
+# left ascending, right ascending, left descending, right descending
 class Board:
 
     def __init__(self):
@@ -76,9 +88,9 @@ class Board:
 
     def init_board(self):
         for i in range(2):
-            self.stacks.append(DiscardPile(STACK_TYPE_UP))
+            self.stacks.append(DiscardPile(STACK_TYPE_ASCENDING))
         for i in range(2):
-            self.stacks.append(DiscardPile(STACK_TYPE_DOWN))
+            self.stacks.append(DiscardPile(STACK_TYPE_DESCENDING))
         # add to every Stack_type_up stack a 0 to the top
         for stack in self.stacks[:2]:
             stack.push(Card(1))
@@ -98,6 +110,9 @@ class Hand:
 
     def remove(self, card):
         self.list.remove(card)
+
+    def contains(self, card):
+        return card in self.list
 
     def __len__(self):
         return len(self.list)

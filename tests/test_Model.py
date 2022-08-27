@@ -1,8 +1,7 @@
 import pytest
 
 import Model
-from Model import Card, CardPile, DiscardPile, Board
-
+from Model import Card, CardPile, DiscardPile, Board, Hand
 
 # Card tests
 def test_invalid_cards():
@@ -37,8 +36,8 @@ def test_draw_pile_construction():
 
 def test_discard_pile():
     discard = DiscardPile(0)
-    assert discard.constraint == Model.STACK_TYPE_UP
-    assert discard.isUp()
+    assert discard.constraint == Model.STACK_TYPE_ASCENDING
+    assert discard.isAscending()
     discard = DiscardPile(1)
     assert discard.constraint == 1
 
@@ -46,7 +45,18 @@ def test_discard_pile():
 def test_board_construction():
     board = Board()
     assert len(board.stacks) == 4
-    assert board.stacks[0].constraint == Model.STACK_TYPE_UP
-    assert board.stacks[1].constraint == Model.STACK_TYPE_UP
-    assert board.stacks[2].constraint == 1
-    assert board.stacks[3].constraint == 1
+    assert board.stacks[0].constraint == Model.STACK_TYPE_ASCENDING
+    assert board.stacks[1].constraint == Model.STACK_TYPE_ASCENDING
+    assert board.stacks[2].constraint == Model.STACK_TYPE_DESCENDING
+    assert board.stacks[3].constraint == Model.STACK_TYPE_DESCENDING
+
+
+def test_small_hand():
+    hand = Hand()
+    hand.append(Card(5))
+    hand.append(Card(10))
+
+    assert not hand.contains(5)
+    assert hand.contains(Card(5))
+    assert hand.contains(Card(10))
+    assert not hand.contains(Card(7))
