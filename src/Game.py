@@ -99,7 +99,15 @@ class Move:
             self.card = Card(cardOrValue)
 
     def delta(self):
-        return abs(self.card.value - self.pile.top().value)
+        pile = self.pile
+        card = self.card
+        delta = abs(card.value - pile.top().value)
+
+        if delta == 10 and pile.isAscending() and card.value < pile.top().value:
+            return -10
+        if delta == 10 and pile.isDescending() and card.value > pile.top().value:
+            return -10
+        return delta
 
     def __repr__(self):
         return f"Player {self.player} discards {self.card} to pile {self.pile} ({self.delta()})"

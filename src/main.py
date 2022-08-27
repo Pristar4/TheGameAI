@@ -32,6 +32,7 @@ def main():
     print(game.board.draw_pile)
     print("Cards Left:",len(game.board.draw_pile) + x)
 
+
 def doTurn(game, player):
     print("-------------------------")
     print(f"It is {player}'s turn.")
@@ -64,6 +65,7 @@ def doTurn(game, player):
         game.print_board()
         print(f"Draw {drawn} new Cards to Hand : {player.hand}")
         return False
+
 
 def inputMove(game, player):
     hand: Hand = player.hand
