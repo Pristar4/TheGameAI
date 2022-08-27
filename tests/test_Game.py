@@ -1,7 +1,4 @@
-import random
-import pytest
-
-from Game import GameState, Player, Move
+from Game import GameState, Move
 
 
 def test_empty_game_state():
@@ -61,7 +58,7 @@ def test_turn():
     s4 = game.board.stacks[3]
 
     # 1st move 7 to s1
-    # 2st move 67 to s4
+    # 2nd move 67 to s4
     # draw 2
 
     game.execute_move(Move(p1, 7, s1))
@@ -69,7 +66,3 @@ def test_turn():
     assert str(p1.hand) == "[51, 55, 35, 67, 64]"
     assert len(s1) == 2
     assert str(s1.top()) == "7"
-
-
-
-

@@ -18,8 +18,10 @@ class Card:
             return self.value == other.value
         else:
             return False
+
     def __str__(self):
         return f"{self.value}"
+
     def __repr__(self):
         return f"{self.value}"
 
@@ -102,5 +104,3 @@ class Hand:
 
     def __repr__(self):
         return f"{self.list}"
-
-

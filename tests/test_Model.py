@@ -1,4 +1,3 @@
-import random
 import pytest
 
 import Model
@@ -8,9 +7,9 @@ from Model import Card, CardPile, DiscardPile, Board
 # Card tests
 def test_invalid_cards():
     with pytest.raises(ValueError):
-        card = Card(0)
+        Card(0)
     with pytest.raises(ValueError):
-        card = Card(101)
+        Card(101)
 
 
 def test_special_cards():
