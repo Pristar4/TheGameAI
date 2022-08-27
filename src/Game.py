@@ -37,7 +37,7 @@ class GameState:
 
     def drawHand(self, player):
         drawn = 0
-        while len(player.hand) < self.handLimit:
+        while len(player.hand) < self.handLimit and self.board.draw_pile:
             card = self.board.draw_pile.pop()
             player.hand.append(card)
             drawn += 1

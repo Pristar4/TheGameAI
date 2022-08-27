@@ -17,7 +17,7 @@ class AI(Player):
         while len(moves) < 2:
             validMoves = game.findValidMoves(self)
             validMoves.sort(key=lambda m: m.delta(), reverse=True)
-            if not validMoves: # empty
+            if not validMoves:  # empty
                 return moves
 
             move = validMoves.pop()

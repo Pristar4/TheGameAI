@@ -7,7 +7,8 @@ def main():
     # create a new game
     game = GameState()
     # add 2 4 players
-    game.players.append(AI("AI"))
+    game.players.append(AI("AI1"))
+    game.players.append(AI("AI2"))
     # game.players.append(Player("Human"))
     game.init(4711)
 
@@ -27,7 +28,8 @@ def main():
     game.print_board()
     x = 0
     for player in game.players:
-        print(player)
+        moves = len(game.findValidMoves(player))
+        print(f"{player}'s Hand : {player.hand} ({moves} moves left)")
         x += len(player.hand)
     print(game.board.draw_pile)
     print("Cards Left:",len(game.board.draw_pile) + x)
