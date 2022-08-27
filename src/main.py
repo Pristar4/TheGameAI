@@ -1,3 +1,5 @@
+import sys
+
 from AI import AI
 from Game import GameState, Move, Player
 from Model import Card, Hand
@@ -13,20 +15,12 @@ def main():
     game.init(4711)
 
     # Game loop
-    while not game.gameover:
-        player = game.players[game.current_player]
-
-        # do players turn
-        if game.current_player == 0:
-            print(f"Turn {game.turn} ===============================")
-            game.turn += 1
-
-        game.gameover = doTurn(game, player)
-
-        # switch to the next player
-        game.current_player = (game.current_player + 1) % len(game.players)
+    main_loop(game)
+    # print End Stats
+    print_game_stats(game)
 
 
+def print_game_stats(game):
     print("====================================")
     game.print_board()
     x = 0
@@ -36,6 +30,19 @@ def main():
         x += len(player.hand)
     print(game.board.draw_pile)
     print("Cards Left:", len(game.board.draw_pile) + x)
+
+
+def main_loop(game):
+    while not game.gameover:
+        player = game.players[game.current_player]
+
+        # do players turn
+        game.gameover = doTurn(game, player)
+
+        # switch to the next player
+        game.current_player = (game.current_player + 1) % len(game.players)
+        # if game.current_player == 0:
+        #   self.turn += 1
 
 
 def doTurn(game, player):
