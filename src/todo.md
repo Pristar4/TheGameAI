@@ -1,3 +1,3 @@
 ### TODOs
-* flex number of players 2..4
-* simple AI
+* terminal condition AI (no valid move possible)
+* sonderregel delta == 10

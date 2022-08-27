@@ -1,11 +1,14 @@
-
-from Game import GameState, Move
+from AI import AI
+from Game import GameState, Move, Player
 from Model import Card, Hand
 
 
 def main():
     # create a new game
     game = GameState()
+    # add 2 4 players
+    game.players.append(AI("AI"))
+    #game.players.append(Player("Human"))
     game.init()
 
     # Game loop
@@ -24,20 +27,32 @@ def main():
 def doTurn(game, player):
     print("-------------------------")
     print(f"It is {player}'s turn.")
-    moves = 0
-    while len(player.hand) > 0:
-        moves += 1
-        print(f"-- move {moves} --")
+    # FIXME polymorph...
+    if player.isAI():
         game.print_board()
-        move = inputMove(game, player)
-        game.execute_move(move)
-        if moves >= 2:
-            _ = input("[c]ontinue or [f]inish turn : ")
-            if _ == 'f':
-                break
-    drawn = game.drawHand(player)
-    game.print_board()
-    print(f"Draw {drawn} new Cards to Hand : {player.hand}")
+        print(f"Hand : {player.hand}")
+        ai:AI = player
+        ai.findMoves(game)
+    else:
+        moves = 0
+        while len(player.hand) > 0:
+
+            if (len(game.findValidMoves(player)) == 0):
+                print("No more moves possible!")
+                return
+
+            moves += 1
+            print(f"-- move {moves} --")
+            game.print_board()
+            move = inputMove(game, player)
+            game.execute_move(move)
+            if moves >= 2:
+                _ = input("[c]ontinue or [f]inish turn : ")
+                if _ == 'f':
+                    break
+        drawn = game.drawHand(player)
+        game.print_board()
+        print(f"Draw {drawn} new Cards to Hand : {player.hand}")
 
 
 def inputMove(game, player):
