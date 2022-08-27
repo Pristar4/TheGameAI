@@ -3,9 +3,6 @@ from Game import GameState, Move
 from Model import Card, Hand
 
 
-# constants for stack types
-
-
 def main():
     # create a new game
     game = GameState()
@@ -38,23 +35,35 @@ def doTurn(game, player):
             _ = input("[c]ontinue or [f]inish turn : ")
             if _ == 'f':
                 break
-    game.drawHand(player)
+    drawn = game.drawHand(player)
+    game.print_board()
+    print(f"Draw {drawn} new Cards to Hand : {player.hand}")
+
 
 def inputMove(game, player):
     hand: Hand = player.hand
 
-    # print the hand of the player
-    print(f"Hand : {hand}")
-    # input Card
-    card = Card(int(input(f"{player.name} choose card value: ")))
-    # validate
-    if not hand.contains(card):
-        raise ValueError(f"Hand does not contain the Card {card}!")
+    while True:
+        # print the hand of the player
+        print(f"Hand : {hand}")
+        # input Card
+        # TODO loop until valid input
+        card = Card(int(input(f"{player.name} choose card value: ")))
+        # validate
+        if not hand.contains(card):
+            raise ValueError(f"Hand does not contain the Card {card}!")
+            # TODO handle Error in logic
 
-    stacknum = int(input("Choose Stack (1..4): "))
-    stack = game.board.stacks[stacknum-1]
-    move = Move(player, card, stack)
-    return move
+        # TODO loop until valid input
+        stacknr = int(input("Choose Stack (1..4): "))
+        # TODO handle invalid input: stacknum not in range(1,5)
+        stack = game.board.stacks[stacknr - 1]
+        move = Move(player, card, stack)
+        # check is move is valid
+        if game.test_move(move):
+            return move
+        else:
+            print(f"invalid Move {move}")
 
 
 if __name__ == "__main__":

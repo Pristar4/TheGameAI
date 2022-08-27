@@ -44,6 +44,15 @@ class GameState:
         # discard card to stack
         move.pile.push(move.card)
 
+    # return True if move is valid
+    def test_move(self, move):
+        pile:DiscardPile = move.pile
+        card:Card = move.card
+        if pile.isAscending():
+            return card.value > pile.top().value
+        else:  # descending pile
+            return card.value < pile.top().value
+
     def print_board(self):
         # print the top card of every stack in the same line separated by a space
         print("Board :",  " | ".join([str(stack.top()) for stack in self.board.stacks]))
@@ -59,7 +68,7 @@ class Player:
 
 
 class Move:
-    def __init__(self, player, cardOrValue, stack):
+    def __init__(self, player, cardOrValue, stack:DiscardPile):
         self.player = player
         self.pile = stack
         if type(cardOrValue) == Card:
