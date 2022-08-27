@@ -8,21 +8,29 @@ def main():
     game = GameState()
     # add 2 4 players
     game.players.append(AI("AI"))
-    #game.players.append(Player("Human"))
-    game.init()
+    # game.players.append(Player("Human"))
+    game.init(4711)
 
     # Game loop
-    while True:
+    while not game.gameover:
         player = game.players[game.current_player]
 
         # do players turn
-        doTurn(game, player)
+        game.gameover = doTurn(game, player)
 
         # switch to the next player
         game.current_player = (game.current_player + 1) % len(game.players)
         # if game.current_player == 0:
         #   self.turn += 1
 
+    print("====================================")
+    game.print_board()
+    x = 0
+    for player in game.players:
+        print(player)
+        x += len(player.hand)
+    print(game.board.draw_pile)
+    print("Cards Left:",len(game.board.draw_pile) + x)
 
 def doTurn(game, player):
     print("-------------------------")
@@ -31,15 +39,17 @@ def doTurn(game, player):
     if player.isAI():
         game.print_board()
         print(f"Hand : {player.hand}")
-        ai:AI = player
-        ai.findMoves(game)
+        ai: AI = player
+        moves = ai.findMoves(game)
+        if len(moves) < 2:
+            return True
     else:
         moves = 0
         while len(player.hand) > 0:
 
             if (len(game.findValidMoves(player)) == 0):
                 print("No more moves possible!")
-                return
+                return True
 
             moves += 1
             print(f"-- move {moves} --")
@@ -53,7 +63,7 @@ def doTurn(game, player):
         drawn = game.drawHand(player)
         game.print_board()
         print(f"Draw {drawn} new Cards to Hand : {player.hand}")
-
+        return False
 
 def inputMove(game, player):
     hand: Hand = player.hand

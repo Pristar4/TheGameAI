@@ -8,6 +8,7 @@ class GameState:
     def __init__(self):
         self.board = Board()
         self.players = []
+        self.gameover = False
 
     def init(self, seed=0):
         num_players = len(self.players)
@@ -52,6 +53,10 @@ class GameState:
     def test_move(self, move):
         pile: DiscardPile = move.pile
         card: Card = move.card
+
+        if move.delta() == -10:  # special rule
+            return True
+
         if pile.isAscending():
             return card.value > pile.top().value
         else:  # descending pile
@@ -97,4 +102,4 @@ class Move:
         return abs(self.card.value - self.pile.top().value)
 
     def __repr__(self):
-        return f"Player {self.player} discards {self.card} to pile {self.pile}"
+        return f"Player {self.player} discards {self.card} to pile {self.pile} ({self.delta()})"
