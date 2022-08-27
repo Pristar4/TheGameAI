@@ -1,6 +1,7 @@
-from Model import Board, Card, DiscardPile, Hand
-from Game import Player, GameState, Move
+from Model import Player
+from Game import GameState, Move
 
+THRESHOLD = 1
 
 class AI(Player):
 
@@ -26,15 +27,13 @@ class AI(Player):
             delta = move.delta()
             special = self.findSecialCombo(game, delta)
             if special:
-                print("* special combo found!")
+                game.listener.logAI("* special combo found!")
                 for move in special.moves:
-                    print(f"AI moves {move}")
                     game.execute_move(move)
                     moves.append(move)
             else:
-                if delta > 1 and len(moves) >= 2:
+                if delta > THRESHOLD and len(moves) >= 2:
                     break
-                print(f"AI moves {move}")
                 game.execute_move(move)
                 moves.append(move)
         # while

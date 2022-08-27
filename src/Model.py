@@ -129,3 +129,15 @@ class Hand:
 
     def __repr__(self):
         return f"{self.list}"
+
+
+class Player:
+    def __init__(self, name):
+        self.name = name
+        self.hand = Hand()
+
+    def __repr__(self):
+        return f"{self.name}"
+
+    def isAI(self):
+        return False;

@@ -3,13 +3,40 @@ import random
 from Model import Board, Card, DiscardPile, Hand
 
 
+class GameListener:
+    def __init__(self):
+        pass
+
+    def startRound(self, game) -> None:
+        pass
+
+    def startTurn(self, game, player) -> None:
+        pass
+
+    def startMove(self, game, player) -> None:
+        pass
+
+    def doMove(self, move):
+        pass
+
+    def gameover(self, game) -> None:
+        pass
+
+    def logAI(self, text):
+        pass
+
+
 class GameState:
 
     def __init__(self):
         self.board = Board()
         self.players = []
         self.gameover = False
-        self.turn = 1
+        self.round = 0
+        self.listener = GameListener()
+
+    def setListener(self, listener):
+        self.listener = listener
 
     def init(self, seed=0):
         num_players = len(self.players)
@@ -45,6 +72,7 @@ class GameState:
         return drawn
 
     def execute_move(self, move):
+        self.listener.doMove(move)
         # remove card from hand
         move.player.hand.remove(move.card)
         # discard card to stack
@@ -69,17 +97,13 @@ class GameState:
         # print the top card of every stack in the same line separated by a space
         print("Board :", " | ".join([str(stack.top()) for stack in self.board.stacks]))
 
+    def remainingCards(self):
+        sum = 0
+        for player in self.players:
+            sum += len(player.hand)
+        sum += len(self.board.draw_pile)
+        return sum
 
-class Player:
-    def __init__(self, name):
-        self.name = name
-        self.hand = Hand()
-
-    def __repr__(self):
-        return f"{self.name}"
-
-    def isAI(self):
-        return False;
 
 
 class Move:

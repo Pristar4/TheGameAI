@@ -1,39 +1,45 @@
 import sys
 
 from AI import AI
-from Game import GameState, Move, Player
-from Model import Card, Hand
+from ConsoleUI import ConsoleUI
+from Game import GameState, Move, GameListener
+from Model import Card, Hand, Player
 
 
 def main():
+
+    games = []
+    best = 100
+    for i in range(2, 2+1):
+        game = createGame(i, 2)
+        runGame(game)
+        games.append(game)
+        best = min(best, game.remainingCards())
+
+    print(f"run {len(games)} games, best result: {best}")
+
+
+def createGame(seed=0, numKI=1, numHuman=0):
     # create a new game
     game = GameState()
-    # add 2 4 players
-    game.players.append(AI("AI1"))
-    game.players.append(AI("AI2"))
-    # game.players.append(Player("Human"))
-    game.init(4711)
+    game.setListener(ConsoleUI())
 
-    # Game loop
-    main_loop(game)
-    # print End Stats
-    print_game_stats(game)
+    for _ in range(numKI):
+        game.players.append(AI(f"AI{_+1}"))
+    for _ in range(numHuman):
+        game.players.append(Player(f"Human{_+1}"))
 
-
-def print_game_stats(game):
-    print("====================================")
-    game.print_board()
-    x = 0
-    for player in game.players:
-        moves = len(game.findValidMoves(player))
-        print(f"{player}'s Hand : {player.hand} ({moves} moves left)")
-        x += len(player.hand)
-    print(game.board.draw_pile)
-    print("Cards Left:", len(game.board.draw_pile) + x)
+    game.init(seed)
+    return game
 
 
-def main_loop(game):
+def runGame(game):
     while not game.gameover:
+
+        if game.current_player == 0:
+            game.round += 1
+            game.listener.startRound(game)
+
         player = game.players[game.current_player]
 
         # do players turn
@@ -41,27 +47,26 @@ def main_loop(game):
 
         # switch to the next player
         game.current_player = (game.current_player + 1) % len(game.players)
-        # if game.current_player == 0:
-        #   self.turn += 1
+
+    game.listener.gameover(game)
 
 
 def doTurn(game, player):
-    print("-------------------------")
-    print(f"It is {player}'s turn.")
+
+    game.listener.startTurn(game, player)
     # FIXME polymorph...
     if player.isAI():
-        game.print_board()
-        print(f"Hand : {player.hand}")
+        game.listener.startMove(game, player)
         ai: AI = player
         moves = ai.findMoves(game)
         if len(moves) < 2:
             return True
     else:
+        # TODO move to ConsoleUI (only human)
         moves = 0
         while len(player.hand) > 0:
 
             if (len(game.findValidMoves(player)) == 0):
-                print("No more moves possible!")
                 return True
 
             moves += 1
