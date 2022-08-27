@@ -60,6 +60,12 @@ class DiscardPile:
     def push(self, card):
         self.stack.append(card)
 
+    # __copy__??
+    def copy(self):
+        cpy = DiscardPile(self.constraint)
+        cpy.stack = self.stack.copy()
+        return cpy
+
     def top(self):
         return self.stack[-1]
 
@@ -73,8 +79,12 @@ class DiscardPile:
         return len(self.stack)
 
     def __repr__(self):
-        return f"{self.stack}"
+        con = "ASC "
+        if self.isDescending():
+            con = "DESC"
+        top = self.top()
 
+        return f"{con} [{top}]"
 
 # the board has 4 discards stacks in following order
 # left ascending, right ascending, left descending, right descending

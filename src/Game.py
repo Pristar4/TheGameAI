@@ -9,6 +9,7 @@ class GameState:
         self.board = Board()
         self.players = []
         self.gameover = False
+        self.turn = 1
 
     def init(self, seed=0):
         num_players = len(self.players)
@@ -51,16 +52,8 @@ class GameState:
 
     # return True if move is valid
     def test_move(self, move):
-        pile: DiscardPile = move.pile
-        card: Card = move.card
-
-        if move.delta() == -10:  # special rule
-            return True
-
-        if pile.isAscending():
-            return card.value > pile.top().value
-        else:  # descending pile
-            return card.value < pile.top().value
+        delta = move.delta()
+        return delta == -10 or delta > 0
 
     def findValidMoves(self, player):
         validMoves = []
@@ -90,6 +83,7 @@ class Player:
 
 
 class Move:
+
     def __init__(self, player, cardOrValue, stack: DiscardPile):
         self.player = player
         self.pile = stack
@@ -98,16 +92,25 @@ class Move:
         else:
             self.card = Card(cardOrValue)
 
-    def delta(self):
+        self._delta = self.calculate_delta()
+
+    def calculate_delta(self):
         pile = self.pile
         card = self.card
-        delta = abs(card.value - pile.top().value)
+        value = pile.top().value
+        if pile.isAscending():
+            return card.value - value
+        else:  # descending
+            return value - card.value
 
-        if delta == 10 and pile.isAscending() and card.value < pile.top().value:
-            return -10
-        if delta == 10 and pile.isDescending() and card.value > pile.top().value:
-            return -10
-        return delta
+    def delta(self):
+        return self._delta
+
+    def valid(self):
+        return self.special() or self._delta > 0
+
+    def special(self):
+        return self._delta == -10
 
     def __repr__(self):
         return f"Player {self.player} discards {self.card} to pile {self.pile} ({self.delta()})"

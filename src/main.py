@@ -17,12 +17,15 @@ def main():
         player = game.players[game.current_player]
 
         # do players turn
+        if game.current_player == 0:
+            print(f"Turn {game.turn} ===============================")
+            game.turn += 1
+
         game.gameover = doTurn(game, player)
 
         # switch to the next player
         game.current_player = (game.current_player + 1) % len(game.players)
-        # if game.current_player == 0:
-        #   self.turn += 1
+
 
     print("====================================")
     game.print_board()
@@ -32,7 +35,7 @@ def main():
         print(f"{player}'s Hand : {player.hand} ({moves} moves left)")
         x += len(player.hand)
     print(game.board.draw_pile)
-    print("Cards Left:",len(game.board.draw_pile) + x)
+    print("Cards Left:", len(game.board.draw_pile) + x)
 
 
 def doTurn(game, player):
