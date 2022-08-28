@@ -7,25 +7,25 @@ from Model import Board, Card, DiscardPile, Hand
 
 class GameListener:
     def __init__(self):
-        pass
+        raise NotImplementedError()
 
     def startRound(self, game) -> None:
-        pass
+        raise NotImplementedError()
 
     def startTurn(self, game, player) -> None:
-        pass
+        raise NotImplementedError()
 
     def startMove(self, game, player) -> None:
-        pass
+        raise NotImplementedError()
 
     def doMove(self, move):
-        pass
+        raise NotImplementedError()
 
     def game_over(self, game) -> None:
-        pass
+        raise NotImplementedError()
 
     def logAI(self, text):
-        pass
+        raise NotImplementedError()
 
 
 def test_move(move):

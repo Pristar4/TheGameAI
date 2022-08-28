@@ -10,7 +10,7 @@ class GameUi:
         self.game_state = game_state
 
     def getMove(self, player, board):
-        pass
+        raise NotImplementedError()
 
     @staticmethod  # staticmethod is a decorator
     def takeTurn(game_state, player):
@@ -21,4 +21,4 @@ class GameUi:
         pass
 
     def test_Move(self):
-        pass
+        raise NotImplementedError()
