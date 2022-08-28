@@ -3,9 +3,6 @@ from Game import GameListener
 
 class ConsoleUI(GameListener):
 
-    def __init__(self):
-        super().__init__()
-
     def startRound(self, game) -> None:
         print(f"== Round {game.round} =====================")
 
