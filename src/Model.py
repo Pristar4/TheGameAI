@@ -138,5 +138,6 @@ class Player:
     def __repr__(self):
         return f"{self.name}"
 
-    def isAI(self):
+    @staticmethod
+    def isAI():
         return False
