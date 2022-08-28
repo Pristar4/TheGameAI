@@ -132,8 +132,7 @@ class Move:
         value = pile.top().value
         if pile.isAscending():
             return card.value - value
-        else:  # descending
-            return value - card.value
+        return value - card.value
 
     def delta(self):
         return self._delta

@@ -104,8 +104,7 @@ def inputMove(game, player):
         # check is move is valid
         if game.test_move(move):
             return move
-        else:
-            print(f"invalid Move {move}")
+        print(f"invalid Move {move}")
 
 
 if __name__ == "__main__":

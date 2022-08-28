@@ -23,8 +23,7 @@ class Card:
     def __eq__(self, other):
         if isinstance(other, self.__class__):
             return self.value == other.value
-        else:
-            return False
+        return False
 
     def __str__(self):
         return f"{self.value}"
