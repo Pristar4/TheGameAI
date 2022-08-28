@@ -6,7 +6,8 @@
 SPHINXOPTS    ?=
 SPHINXBUILD   ?= sphinx-build
 SOURCEDIR     = docsource
-BUILDDIR      = build
+BUILDDIR      = _build
+
 
 # Put it first so that "make" without argument is like "make help".
 help:
@@ -18,3 +19,12 @@ help:
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
 %: Makefile
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+
+github:
+	@make html
+	@cp -a _build/html/. ../docs
+
+# Update Local SPHINX DOC AND UPLOAD COPY TO GITHUB-PAGES
+gh-deploy:
+	@make html
+	@ghp-import _build/html -p -o -n
