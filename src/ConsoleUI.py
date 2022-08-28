@@ -3,20 +3,25 @@ from Game import GameListener
 
 class ConsoleUI(GameListener):
 
-    def startRound(self, game) -> None:
+    @staticmethod
+    def startRound(game) -> None:
         print(f"== Round {game.round} =====================")
 
-    def startTurn(self, game, player):
+    @staticmethod
+    def startTurn(game, player):
         print(f"It is {player}'s turn.")
 
-    def startMove(self, game, player):
+    @staticmethod
+    def startMove(game, player):
         game.print_board()
         print(f"Hand : {player.hand}")
 
-    def doMove(self, move):
+    @staticmethod
+    def doMove(move):
         print(f"{move}")
 
-    def game_over(self, game) -> None:
+    @staticmethod
+    def game_over(game) -> None:
         print("====================================")
         game.print_board()
         for player in game.players:
@@ -26,5 +31,6 @@ class ConsoleUI(GameListener):
         print("Cards Left:", game.remainingCards(),
               f"after {game.round} rounds.")
 
-    def logAI(self, text):
+    @staticmethod
+    def logAI(text):
         print(text)
