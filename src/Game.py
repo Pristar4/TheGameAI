@@ -119,7 +119,7 @@ class Move:
     def __init__(self, player, card_or_value, stack: DiscardPile):
         self.player = player
         self.pile = stack
-        if type(card_or_value) is Card:
+        if type(card_or_value) == Card:
             self.card = card_or_value
         else:
             self.card = Card(card_or_value)
