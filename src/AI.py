@@ -6,9 +6,6 @@ THRESHOLD = 1
 
 class AI(Player):
 
-    def __init__(self, name):
-        super().__init__(name)
-
     def isAI(self):
         return True
 
