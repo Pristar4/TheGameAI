@@ -12,7 +12,8 @@ class GameUi:
     def getMove(self, player, board):
         pass
 
-    def takeTurn(self, game_state, player):
+    @staticmethod  # staticmethod is a decorator
+    def takeTurn(game_state, player):
         # get possible move from Input from human
         i = input("Enter your move: ")
         # execute move

@@ -140,4 +140,4 @@ class Player:
         return f"{self.name}"
 
     def isAI(self):
-        return False;
+        return False

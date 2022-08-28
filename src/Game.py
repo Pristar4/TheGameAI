@@ -19,19 +19,26 @@ class GameListener:
     def doMove(self, move):
         pass
 
-    def gameover(self, game) -> None:
+    def game_over(self, game) -> None:
         pass
 
     def logAI(self, text):
         pass
 
 
+def test_move(move):
+    delta = move.delta()
+    return delta == -10 or delta > 0
+
+
 class GameState:
 
     def __init__(self):
+        self.current_player = None
+        self.handLimit = None
         self.board = Board()
         self.players = []
-        self.gameover = False
+        self.game_over = False
         self.round = 0
         self.listener = GameListener()
 
@@ -41,7 +48,8 @@ class GameState:
     def init(self, seed=0):
         num_players = len(self.players)
         if num_players < 1 or num_players > 5:
-            raise ValueError(f"invalid number of players! is {num_players}, should be 1..5.")
+            raise ValueError(f"invalid number of players! is {num_players}, "
+                             f"should be 1..5.")
         self.handLimit = 6
         if num_players == 2:
             self.handLimit += 1
@@ -79,42 +87,40 @@ class GameState:
         move.pile.push(move.card)
 
     # return True if move is valid
-    def test_move(self, move):
-        delta = move.delta()
-        return delta == -10 or delta > 0
 
     def findValidMoves(self, player):
-        validMoves = []
+        valid_moves = []
         for pile in self.board.stacks:
             for card in player.hand.list:
                 move = Move(player, card, pile)
 
-                if self.test_move(move):
-                    validMoves.append(move)
-        return validMoves
+                if test_move(move):
+                    valid_moves.append(move)
+        return valid_moves
 
     def print_board(self):
-        # print the top card of every stack in the same line separated by a space
-        print("Board :", " | ".join([str(stack.top()) for stack in self.board.stacks]))
+        # print the top card of every stack in the same line separated by a
+        # space
+        print("Board :",
+              " | ".join([str(stack.top()) for stack in self.board.stacks]))
 
     def remainingCards(self):
-        sum = 0
+        total = 0
         for player in self.players:
-            sum += len(player.hand)
-        sum += len(self.board.draw_pile)
-        return sum
-
+            total += len(player.hand)
+        total += len(self.board.draw_pile)
+        return total
 
 
 class Move:
 
-    def __init__(self, player, cardOrValue, stack: DiscardPile):
+    def __init__(self, player, card_or_value, stack: DiscardPile):
         self.player = player
         self.pile = stack
-        if type(cardOrValue) == Card:
-            self.card = cardOrValue
+        if type(card_or_value) == Card:
+            self.card = card_or_value
         else:
-            self.card = Card(cardOrValue)
+            self.card = Card(card_or_value)
 
         self._delta = self.calculate_delta()
 
@@ -137,4 +143,5 @@ class Move:
         return self._delta == -10
 
     def __repr__(self):
-        return f"Player {self.player} discards {self.card} to pile {self.pile} ({self.delta()})"
+        return f"Player {self.player} discards {self.card} " \
+               f"to pile {self.pile} ({self.delta()}) "
