@@ -26,8 +26,8 @@ class ConsoleUI(GameListener):
             moves = len(game.findValidMoves(player))
             print(f"{player}'s Hand : {player.hand} ({moves} moves left)")
         print(game.board.draw_pile)
-        print("Cards Left:", game.remainingCards(), f"after {game.round} rounds.")
+        print("Cards Left:", game.remainingCards(),
+              f"after {game.round} rounds.")
 
     def logAI(self, text):
         print(text)
-
