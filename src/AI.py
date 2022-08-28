@@ -1,7 +1,8 @@
-from Model import Player
 from Game import GameState, Move
+from Model import Player
 
 THRESHOLD = 1
+
 
 class AI(Player):
 
@@ -15,7 +16,7 @@ class AI(Player):
     def findMoves(self, game: GameState):
         moves = []
         # find 2 moves
-        while True: #len(moves) < 2:
+        while True:  # len(moves) < 2:
 
             best = game.findValidMoves(self)
             best.sort(key=lambda m: m.delta(), reverse=False)
@@ -25,7 +26,7 @@ class AI(Player):
 
             # find special combo
             delta = move.delta()
-            special = self.findSecialCombo(game, delta)
+            special = self.findSpecialCombo(game, delta)
             if special:
                 game.listener.logAI("* special combo found!")
                 for move in special.moves:
@@ -41,7 +42,7 @@ class AI(Player):
         game.drawHand(self)
         return moves
 
-    def findSecialCombo(self, game: GameState, best=2):
+    def findSpecialCombo(self, game: GameState, best=2):
         for pile in game.board.stacks:
             pms = []
             for card in self.hand.list:
@@ -56,7 +57,7 @@ class AI(Player):
                 if combo.delta < best:
                     return combo
 
-            #for stacks
+            # for stacks
         return None
 
 

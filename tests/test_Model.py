@@ -3,6 +3,7 @@ import pytest
 import Model
 from Model import Card, CardPile, DiscardPile, Board, Hand
 
+
 # Card tests
 def test_invalid_cards():
     with pytest.raises(ValueError):

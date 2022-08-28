@@ -12,7 +12,7 @@
 - Each Turn, a player:
     - Play a card from their hand.
     - The Player has to play a minimum of 2 cards.
-    - After the Player doesnt want to play more cards or cant he draws new cards from the deck until he has 6 cards again.
+    - After the Player doesn't want to play more cards or cant he draws new cards from the deck until he has 6 cards again.
     - The Player can only play cards that are lower than the top card of a `down-stack` or higher than the top card of an `up-stack`.
   ### Down-stack:
       - Counts down (99 to 2).
