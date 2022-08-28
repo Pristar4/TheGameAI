@@ -18,7 +18,6 @@ class GameUi:
         i = input("Enter your move: ")
         # execute move
         game_state.execute_move(i, player)
-        pass
 
     def test_Move(self):
         raise NotImplementedError()
