@@ -18,6 +18,18 @@ def main():
 
 
 def createGame(seed=0, num_ai=1, num_human=0):
+    """ Create a new Game
+    This function creates a new Game with the given number of AI and Human players.
+
+    :param seed: seed for the random generator
+    :type seed: int
+    :param num_ai: number of AI players
+    :type num_ai: int
+    :param num_human: number of human players
+    :type num_human: int
+    :return: game
+    :rtype: GameState
+    """
     # create a new game
     game = GameState()
     game.setListener(ConsoleUI())

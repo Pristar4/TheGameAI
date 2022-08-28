@@ -1,0 +1,12 @@
+
+opython:S1542"PRename function "createGame" to match the regular expression ^[a-z_][a-z0-9_]*$.(ªşç†8”åÂ±®0
+qpython:S1542."MRename function "runGame" to match the regular expression ^[a-z_][a-z0-9_]*$.(ÌêÒ×ûÿÿÿÿ8•åÂ±®0
+kpython:S1542@"LRename function "doTurn" to match the regular expression ^[a-z_][a-z0-9_]*$.(‚˜ôÜ8•åÂ±®0
+spython:S3776@"TRefactor this function to reduce its Cognitive Complexity from 16 to the 15 allowed.(‚˜ôÜ8—åÂ±®0
+kpython:S1134C"LTake the required action to fix the issue indicated by this "FIXME" comment.(´¶›8—åÂ±®0
+Spython:S1135K"4Complete the task associated to this "TODO" comment.(ù†šÄ8—åÂ±®0
+spython:S1542a"ORename function "inputMove" to match the regular expression ^[a-z_][a-z0-9_]*$.(¤Éß¸ùÿÿÿÿ8—åÂ±®0
+Spython:S1135h"4Complete the task associated to this "TODO" comment.(ÿØë8—åÂ±®0
+Spython:S1135m"4Complete the task associated to this "TODO" comment.(Çß§¨8˜åÂ±®0
+Spython:S1135o"4Complete the task associated to this "TODO" comment.(ìá×Í8˜åÂ±®0
+Xpython:S1135q"4Complete the task associated to this "TODO" comment.(¨Ì­Êùÿÿÿÿ8˜åÂ±®0
