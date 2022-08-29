@@ -49,3 +49,6 @@ You can find the Documentation at: https://pristar4.github.io/TheGameAI/
     ```make html
     this way you generate the html documentation based your latest version
     ```
+    ### HOTFIX:
+    just do make gh-pages within docs folder on main 
+    it will auto copy changes to gh-pages
