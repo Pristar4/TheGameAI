@@ -12,7 +12,7 @@ def main():
     """
     games = []
     best = 100
-    for i in range(2, 2+1):
+    for i in range(2, 2 + 1):
         game = createGame(i, 2)
         runGame(game)
         games.append(game)
@@ -22,7 +22,7 @@ def main():
 
 
 def createGame(seed=0, num_ai=1, num_human=0):
-    """ Create a new Game This function creates a new Game with the given
+    """Create a new Game This function creates a new Game with the given
     number of AI and Human players.
     :param seed: seed for the random generator
     :type seed: int
@@ -47,7 +47,7 @@ def createGame(seed=0, num_ai=1, num_human=0):
 
 
 def runGame(game):
-    """ Run the game
+    """Run the game
     :param game: game to run
     :type game: GameState
     """
@@ -69,7 +69,7 @@ def runGame(game):
 
 
 def doTurn(game, player):
-    """ Do a turn for the player in the game
+    """Do a turn for the player in the game
     :param game: game to do the turn in
     :type game: GameState
     :param player: player to do the turn for
@@ -100,7 +100,7 @@ def doTurn(game, player):
             game.execute_move(move)
             if moves >= 2:
                 _ = input("Continue or Finish turn : ")
-                if _ == 'f':
+                if _ == "f":
                     break
         drawn = game.drawHand(player)
         game.print_board()
@@ -109,7 +109,7 @@ def doTurn(game, player):
 
 
 def inputMove(game, player):
-    """ Manager the human input for a move
+    """Manager the human input for a move
     :param game: game to do the turn in
     :type game: GameState
     :param player: player to do the turn for

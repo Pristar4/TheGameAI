@@ -12,10 +12,11 @@ STACK_IDX_RIGHT_DESC = 3
 
 
 class Card:
+
     def __init__(self, value):
         self.value = value
         if value not in range(1, 101):
-            raise ValueError('valid value 1..100')
+            raise ValueError("valid value 1..100")
 
     def isValid(self):
         return self.value in range(2, 100)
@@ -33,6 +34,7 @@ class Card:
 
 
 class CardPile:
+
     def __init__(self):
         self.stack = []
         for i in range(2, 100):
@@ -52,6 +54,7 @@ class CardPile:
 
 
 class DiscardPile:
+
     def __init__(self, stack_type):
         self.stack = []
         self.constraint = stack_type
@@ -85,6 +88,7 @@ class DiscardPile:
 
         return f"{con} [{top}]"
 
+
 # the board has 4 discards stacks in following order
 # left ascending, right ascending, left descending, right descending
 class Board:
@@ -111,6 +115,7 @@ class Board:
 
 
 class Hand:
+
     def __init__(self):
         self.list = []
 
@@ -131,6 +136,7 @@ class Hand:
 
 
 class Player:
+
     def __init__(self, name):
         self.name = name
         self.hand = Hand()

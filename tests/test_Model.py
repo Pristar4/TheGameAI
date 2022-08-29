@@ -1,7 +1,7 @@
 import pytest
 
 import Model
-from Model import Card, CardPile, DiscardPile, Board, Hand
+from Model import Board, Card, CardPile, DiscardPile, Hand
 
 
 # Card tests
