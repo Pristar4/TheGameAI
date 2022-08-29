@@ -1,18 +1,24 @@
-name: "Documentation"
+name: "📜 Documentation builder"
 on: [push, pull_request]
 
 jobs:
   docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: sphinx-toolbox/sphinx-action@master
-        with:
-          pre-build-command: "pip install .[docs]"
-          docs-folder: "docs/"
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/master'
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/_build/html
+    - uses: actions/checkout@master
+      with:
+        fetch-depth: 0 # To be able to push refs to destination repo
+    - uses: actions/setup-python@v3
+    - uses: ammaraskar/sphinx-action@master
+      with:
+        build-command: "sphinx-build -b html docsource/ _build "
+        docs-folder: "docs/"
+        pre-build-command: |
+          pip install myst-parser
+          pip install myst-nb
+    - name: Deploy 🚀
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs/build
