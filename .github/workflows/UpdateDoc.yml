@@ -15,4 +15,5 @@ jobs:
         if: github.ref == 'refs/heads/master'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          build-command: "sphinx-build -b html docsource/ _build -w /tmp/sphinx.log "
           publish_dir: docs/_build/html
