@@ -1,6 +1,10 @@
 name: "📜 Documentation builder"
 on: [pull_request]
 
+concurrency:
+  group: ci-tests-${{ github.ref }}-1
+  cancel-in-progress: true
+
 jobs:
   docs:
     runs-on: ubuntu-latest
