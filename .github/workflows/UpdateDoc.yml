@@ -1,5 +1,5 @@
 name: "📜 Documentation builder"
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
   docs:
