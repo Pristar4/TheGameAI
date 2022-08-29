@@ -5,7 +5,11 @@ from Model import Card, Hand, Player
 
 
 def main():
+    """
+    Main function
 
+    :rtype: None
+    """
     games = []
     best = 100
     for i in range(2, 2+1):
@@ -44,6 +48,10 @@ def createGame(seed=0, num_ai=1, num_human=0):
 
 
 def runGame(game):
+    """Run the game
+    :param game: game to run
+    :type game: GameState
+    """
     while not game.game_over:
 
         if game.current_player == 0:
@@ -62,7 +70,15 @@ def runGame(game):
 
 
 def doTurn(game, player):
+    """ Do a turn for the player in the game
 
+    :param game: game to do the turn in
+    :type game: GameState
+    :param player: player to do the turn for
+    :type player: Player
+    :return: True if the game is over, False otherwise
+    :rtype: bool
+    """
     game.listener.startTurn(game, player)
     # FIXME polymorph...
     if player.isAI():
@@ -95,6 +111,14 @@ def doTurn(game, player):
 
 
 def inputMove(game, player):
+    """ Manager the human input for a move
+    :param game: game to do the turn in
+    :type game: GameState
+    :param player: player to do the turn for
+    :type player: Player
+    :return: move
+    :rtype: Move
+    """
     hand: Hand = player.hand
 
     while True:
@@ -120,4 +144,5 @@ def inputMove(game, player):
 
 
 if __name__ == "__main__":
+
     main()

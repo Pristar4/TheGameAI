@@ -22,3 +22,11 @@ jobs:
 
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs/build
+
+
+# fixme - fix this in the workflow, currently  no build maybe look at build-command
+#====================================
+#Building docs in docs/
+#====================================
+#[sphinx-action] Running: ['sphinx-build', '-b', 'html', 'docsource/', '_build', '--keep-going', '--no-color', '-w', '/tmp/sphinx-log']
+#[sphinx-action] Build succeeded with 0 warnings
