@@ -1,11 +1,12 @@
 # Handle the GUI of each Class
 
-
 # Print Board:
 #
 # def print_board(self, board):
 
+
 class GameUi:
+
     def __init__(self, game_state):
         self.game_state = game_state
 
