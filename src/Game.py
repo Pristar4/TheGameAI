@@ -1,11 +1,10 @@
-
-
 import random
 
 from Model import Board, Card, DiscardPile, Hand
 
 
 class GameListener:
+
     def __init__(self):
         raise NotImplementedError()
 
@@ -135,7 +134,7 @@ class Move:
         return value - card.value
 
     def delta(self):
-        """ The delta of a move gives the difference between the value of the
+        """The delta of a move gives the difference between the value of the
         card and the value of the top card of the pile.
         :return The delta of the move.
         :rtype int
@@ -146,12 +145,12 @@ class Move:
         return self.special() or self._delta > 0
 
     def special(self):
-        """ Secial moves have a -10 delta value.
+        """Secial moves have a -10 delta value.
         :return: True if the move is special, False otherwise.
         :rtype: bool
         """
         return self._delta == -10
 
     def __repr__(self):
-        return f"Player {self.player} discards {self.card} " \
-               f"to pile {self.pile} ({self.delta()}) "
+        return (f"Player {self.player} discards {self.card} "
+                f"to pile {self.pile} ({self.delta()}) ")
