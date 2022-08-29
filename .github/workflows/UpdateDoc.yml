@@ -15,7 +15,7 @@ jobs:
         pre-build-command: |
           pip install myst-parser
           pip install myst-nb
-        build-command: "sphinx-build -b html . _build -w /tmp/sphinx.log "
+        build-command: "sphinx-build -W -b html -c ./config.py -d _build -w /tmp/sphinx.log "
     - name: Deploy 🚀
       uses: peaceiris/actions-gh-pages@v3
       with:
