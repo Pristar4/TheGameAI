@@ -22,9 +22,8 @@ def main():
 
 
 def createGame(seed=0, num_ai=1, num_human=0):
-    """ Create a new Game
-    This function creates a new Game with the given number of AI and Human players.
-
+    """ Create a new Game This function creates a new Game with the given
+    number of AI and Human players.
     :param seed: seed for the random generator
     :type seed: int
     :param num_ai: number of AI players
@@ -48,7 +47,7 @@ def createGame(seed=0, num_ai=1, num_human=0):
 
 
 def runGame(game):
-    """Run the game
+    """ Run the game
     :param game: game to run
     :type game: GameState
     """
@@ -71,7 +70,6 @@ def runGame(game):
 
 def doTurn(game, player):
     """ Do a turn for the player in the game
-
     :param game: game to do the turn in
     :type game: GameState
     :param player: player to do the turn for
