@@ -1,12 +1,0 @@
-
-=python:S125	"Remove this commented out code.(‹È‹í8Œ›Ñ±®0
-…
-AYLlybI7NiZ23vvvWQFEpython:S116("QRename this field "handLimit" to match the regular expression ^[_a-z][_a-z0-9]*$.(ÁÀüô8È“é«®0
-ƒ
-AYLlybI7NiZ23vvvWQFFpython:S100/"ORename method "setListener" to match the regular expression ^[a-z_][a-z0-9_]*$.(œ§‰¼8˜ô«®0
-€
-AYLlybI7NiZ23vvvWQFGpython:S100L"LRename method "drawHand" to match the regular expression ^[a-z_][a-z0-9_]*$.(Ô•†…8°şŞú­0
-‹
-AYLlybI7NiZ23vvvWQFHpython:S100]"RRename method "findValidMoves" to match the regular expression ^[a-z_][a-z0-9_]*$.(ñ’Ùôüÿÿÿÿ8€¢ä„®0
-‹
-AYLlybI7NiZ23vvvWQFIpython:S100m"RRename method "remainingCards" to match the regular expression ^[a-z_][a-z0-9_]*$.(Ô¶Çüÿÿÿÿ8˜ô«®0
