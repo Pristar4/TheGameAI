@@ -1,10 +1,6 @@
 version = 1
 
 [[analyzers]]
-name = "test-coverage"
-enabled = true
-
-[[analyzers]]
 name = "python"
 enabled = true
 
@@ -20,9 +16,9 @@ name = "isort"
 enabled = true
 
 [[transformers]]
-name = "yapf"
+name = "black"
 enabled = true
 
 [[transformers]]
-name = "black"
+name = "yapf"
 enabled = true
