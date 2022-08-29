@@ -12,6 +12,12 @@ class AI(Player):
 
     # find valid moves for complete turn
     def findMoves(self, game: GameState):
+        """ Finds all valid moves for the AI player.
+        :param game: The game state to find moves for.
+        :type game:  GameState
+        :return:   A list of valid moves.
+        :rtype:   list[Move]
+        """
         moves = []
         # find 2 moves
         while True:  # len(moves) < 2:
@@ -41,6 +47,14 @@ class AI(Player):
         return moves
 
     def findSpecialCombo(self, game: GameState, best=2):
+        """ Find the best combo available for the current game state.
+        :param game: The game state to find the combo for.
+        :type game: GameState
+        :param best: The number of best moves to return.
+        :type best: int
+        :return: The best combo available for the current game state.
+        :rtype: Combo
+        """
         for pile in game.board.stacks:
             pms = []
             for card in self.hand.list:
@@ -73,6 +87,12 @@ class Combo:
 
 
 def combine1(moves):
+    """ Find all valid combos for the given moves.
+    :param moves: The moves to find combos for.
+    :type moves: list[Move]
+    :return: The valid combos for the given moves.
+    :rtype: list[Combo]
+    """
     # assert(all moves on same stack)
     result = []
     for m in moves:
@@ -82,6 +102,12 @@ def combine1(moves):
 
 
 def combine2(l1moves):
+    """ Find the best combo  for two moves.
+    :param l1moves:
+    :type l1moves:
+    :return:
+    :rtype:
+    """
     # assert(all moves on same stack)
     result = []
     for l1 in l1moves:
@@ -107,6 +133,12 @@ def reduce(moves, move):
 
 
 def combine3(l1moves):
+    """ Find the best combo  for three moves.
+    :param l1moves: The given valid moves.
+    :type l1moves: list[Move]
+    :return: valid 3 move combos.
+    :rtype: list[Combo]
+    """
     # assert(all moves on same stack)
     result = []
     for l1 in l1moves:

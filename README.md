@@ -1,4 +1,7 @@
 You can find the Documentation at: https://pristar4.github.io/TheGameAI/
+
+
+
 # TheGame AI
 
 
@@ -9,6 +12,7 @@ You can find the Documentation at: https://pristar4.github.io/TheGameAI/
 # About TheGame:
     TheGame is a Card Game,
     is played with 4 players.
+    TheGame is played with a deck of 52 cards.
 ## TheGame Rules:
 - TheGame is played with a deck of cards going from 2 to 99.
 - Each player has a hand of 6 cards.
@@ -31,3 +35,17 @@ You can find the Documentation at: https://pristar4.github.io/TheGameAI/
       - the sum of the remaining cards in the players hands
       -  the sum of the cards in the stacks.
   - The Lower the score the better.
+
+# Features:
+
+## Delete the old documentation
+    ```
+    when in docs directory:
+    ```make clean
+    ```
+
+## Generate new Documentation
+    when in docs directory:
+    ```make html
+    this way you generate the html documentation based your latest version
+    ```
