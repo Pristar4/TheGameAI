@@ -136,8 +136,9 @@ class Move:
     def delta(self):
         """The delta of a move gives the difference between the value of the
         card and the value of the top card of the pile.
-        :return The delta of the move.
-        :rtype int
+
+        :return: The delta of the move.
+        :rtype: int
         """
         return self._delta
 
@@ -145,7 +146,8 @@ class Move:
         return self.special() or self._delta > 0
 
     def special(self):
-        """Secial moves have a -10 delta value.
+        """Special moves have a -10 delta value.
+
         :return: True if the move is special, False otherwise.
         :rtype: bool
         """
