@@ -7,7 +7,7 @@ THRESHOLD = 1
 class AI(Player):
 
     @staticmethod
-    def isAI():
+    def is_ai():
         return True
 
     # find valid moves for complete turn

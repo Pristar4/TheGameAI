@@ -131,7 +131,7 @@ class Move:
         pile = self.pile
         card = self.card
         value = pile.top().value
-        if pile.isAscending():
+        if pile.is_ascending():
             return card.value - value
         return value - card.value
 

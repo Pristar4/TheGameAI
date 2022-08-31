@@ -13,15 +13,15 @@ def test_invalid_cards():
 
 
 def test_special_cards():
-    assert not Card(1).isValid()
-    assert not Card(100).isValid()
+    assert not Card(1).is_valid()
+    assert not Card(100).is_valid()
 
 
 def test_all_valid_cards():
     for v in range(2, 99):
         card = Card(v)
         assert card.value == v
-        assert card.isValid()
+        assert card.is_valid()
 
 
 def test_str_repr():
@@ -38,7 +38,7 @@ def test_draw_pile_construction():
 def test_discard_pile():
     discard = DiscardPile(0)
     assert discard.constraint == Model.STACK_TYPE_ASCENDING
-    assert discard.isAscending()
+    assert discard.is_ascending()
     discard = DiscardPile(1)
     assert discard.constraint == 1
 

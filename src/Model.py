@@ -18,7 +18,7 @@ class Card:
         if value not in range(1, 101):
             raise ValueError("valid value 1..100")
 
-    def isValid(self):
+    def is_valid(self):
         return self.value in range(2, 100)
 
     def __eq__(self, other):
@@ -71,10 +71,10 @@ class DiscardPile:
     def top(self):
         return self.stack[-1]
 
-    def isAscending(self):
+    def is_ascending(self):
         return self.constraint == STACK_TYPE_ASCENDING
 
-    def isDescending(self):
+    def is_descending(self):
         return self.constraint == STACK_TYPE_DESCENDING
 
     def __len__(self):
@@ -82,7 +82,7 @@ class DiscardPile:
 
     def __repr__(self):
         con = "ASC "
-        if self.isDescending():
+        if self.is_descending():
             con = "DESC"
         top = self.top()
 
@@ -100,9 +100,9 @@ class Board:
         self.init_board()
 
     def init_board(self):
-        for i in range(2):
+        for _ in range(2):
             self.stacks.append(DiscardPile(STACK_TYPE_ASCENDING))
-        for i in range(2):
+        for _ in range(2):
             self.stacks.append(DiscardPile(STACK_TYPE_DESCENDING))
         # add to every Stack_type_up stack a 0 to the top
         for stack in self.stacks[:2]:
@@ -145,5 +145,5 @@ class Player:
         return f"{self.name}"
 
     @staticmethod
-    def isAI():
+    def is_ai():
         return False

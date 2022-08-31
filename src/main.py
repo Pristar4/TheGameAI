@@ -82,7 +82,7 @@ def do_turn(game, player):
     """
     game.listener.start_turn(game, player)
     # FIXME polymorph...
-    if player.isAI():
+    if player.is_ai():
         game.listener.start_move(game, player)
         ai: AI = player
         moves = ai.findMoves(game)
@@ -110,6 +110,10 @@ def do_turn(game, player):
             #     _ = input("Continue or Finish turn : ")
             #     if _ == "f":
             #         break
+
+
+
+
         drawn = game.draw_hand(player)
         game.print_board()
         print(f"Draw {drawn} new Cards to Hand : {player.hand}")
