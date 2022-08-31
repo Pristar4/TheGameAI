@@ -21,10 +21,10 @@ class GameListener:
         ...
 
     def game_over(self, game) -> None:
-        raise NotImplementedError()
+        ...
 
     def log_ai(self, text):
-        raise NotImplementedError()
+        ...
 
 
 class GameState:
