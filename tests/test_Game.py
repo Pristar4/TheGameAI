@@ -1,61 +1,55 @@
 from Game import GameState, Move
+from main import create_game
 
 
 def test_empty_game_state():
-    # TODO pass num players
-    game = GameState()
+    game = create_game(0, 4)
 
+    game.current_player = 0
+    game.round = 0
     assert len(game.players) == 4
-    assert len(game.board.draw_pile) == 98
-    # TODO turn count == 1
-    # TODO current Player index == 0
+    assert len(game.board.draw_pile) == 74
 
 
 def test_game_init():
-    game = GameState()
-    game.init()
+    game = create_game(0, 4)
 
     for p in game.players:
         assert len(p.hand) == 6
 
 
 def test_draw_hand():
-    game = GameState()
+    game = create_game(0, 4)
+
     player = game.players[0]
-    actual = game.draw_hand(player)
-    assert actual == 6
+    game.draw_hand(player)
     assert len(player.hand) == 6
+    assert str(player.hand) == "[51, 55, 7, 35, 67, 64]"
 
 
 def test_seed_0_cards():
-    game = GameState()
-    game.init(0)
+    game = create_game(0, 4)
 
     p1 = game.players[0]
-    p2 = game.players[1]
 
     assert str(p1.hand) == "[51, 55, 7, 35, 67, 64]"
 
 
 def test_seed_4711_cards():
-    game = GameState()
-    game.init(4711)
+    game = create_game(4711, 4)
 
     p1 = game.players[0]
-    p2 = game.players[1]
 
     assert str(p1.hand) == "[19, 64, 90, 72, 5, 47]"
 
 
 def test_turn():
-    game = GameState()
-    game.init(0)
+    game = create_game(0, 4)
 
     # p1 Hand [51, 55, 7, 35, 67, 64]
     p1 = game.players[0]
     # initial board
     s1 = game.board.stacks[0]
-    s4 = game.board.stacks[3]
 
     # 1st move 7 to s1
     # 2nd move 67 to s4
