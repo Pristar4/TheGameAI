@@ -19,10 +19,10 @@ def test_game_init():
         assert len(p.hand) == 6
 
 
-def test_drawHand():
+def test_draw_hand():
     game = GameState()
     player = game.players[0]
-    actual = game.drawHand(player)
+    actual = game.draw_hand(player)
     assert actual == 6
     assert len(player.hand) == 6
 

@@ -23,7 +23,7 @@ class AI(Player):
         # find 2 moves
         while True:  # len(moves) < 2:
 
-            best = game.findValidMoves(self)
+            best = game.find_valid_moves(self)
             best.sort(key=lambda m: m.delta(), reverse=False)
             if not best:  # empty
                 return moves
@@ -33,7 +33,7 @@ class AI(Player):
             delta = move.delta()
             special = self.findSpecialCombo(game, delta)
             if special:
-                game.listener.logAI("* special combo found!")
+                game.listener.log_ai("* special combo found!")
                 for move in special.moves:
                     game.execute_move(move)
                     moves.append(move)
@@ -44,7 +44,7 @@ class AI(Player):
                 moves.append(move)
         # while
 
-        game.drawHand(self)
+        game.draw_hand(self)
         return moves
 
     def findSpecialCombo(self, game: GameState, best=2):

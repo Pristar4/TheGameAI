@@ -6,44 +6,41 @@ from Model import Board, Card, DiscardPile, Hand
 class GameListener:
 
     def __init__(self):
-        raise NotImplementedError()
+        ...
 
-    def startRound(self, game) -> None:
-        raise NotImplementedError()
+    def start_round(self, game) -> None:
+        ...
 
-    def startTurn(self, game, player) -> None:
-        raise NotImplementedError()
+    def start_turn(self, game, player) -> None:
+        ...
 
-    def startMove(self, game, player) -> None:
-        raise NotImplementedError()
+    def start_move(self, game, player) -> None:
+        ...
 
-    def doMove(self, move):
-        raise NotImplementedError()
+    def do_move(self, move):
+        ...
 
     def game_over(self, game) -> None:
         raise NotImplementedError()
 
-    def logAI(self, text):
+    def log_ai(self, text):
         raise NotImplementedError()
 
 
-def test_move(move):
-    delta = move.delta()
-    return delta == -10 or delta > 0
 
 
 class GameState:
 
     def __init__(self):
         self.current_player = None
-        self.handLimit = None
+        self.hand_limit = None
         self.board = Board()
         self.players = []
         self.game_over = False
         self.round = 0
         self.listener = GameListener()
 
-    def setListener(self, listener):
+    def set_listener(self, listener):
         self.listener = listener
 
     def init(self, seed=0):
@@ -51,11 +48,11 @@ class GameState:
         if num_players < 1 or num_players > 5:
             raise ValueError(f"invalid number of players! is {num_players}, "
                              f"should be 1..5.")
-        self.handLimit = 6
+        self.hand_limit = 6
         if num_players == 2:
-            self.handLimit += 1
+            self.hand_limit += 1
         if num_players == 1:
-            self.handLimit += 2
+            self.hand_limit += 2
         self.current_player = 0
 
         random.seed(seed)
@@ -68,20 +65,20 @@ class GameState:
         for player in self.players:
             # empty hand
             player.hand = Hand()
-            self.drawHand(player)
+            self.draw_hand(player)
 
         self.current_player = 0
 
-    def drawHand(self, player):
+    def draw_hand(self, player):
         drawn = 0
-        while len(player.hand) < self.handLimit and self.board.draw_pile:
+        while len(player.hand) < self.hand_limit and self.board.draw_pile:
             card = self.board.draw_pile.pop()
             player.hand.append(card)
             drawn += 1
         return drawn
 
     def execute_move(self, move):
-        self.listener.doMove(move)
+        self.listener.do_move(move)
         # remove card from hand
         move.player.hand.remove(move.card)
         # discard card to stack
@@ -89,13 +86,13 @@ class GameState:
 
     # return True if move is valid
 
-    def findValidMoves(self, player):
+    def find_valid_moves(self, player):
         valid_moves = []
         for pile in self.board.stacks:
             for card in player.hand.list:
                 move = Move(player, card, pile)
 
-                if test_move(move):
+                if self.test_move(move):
                     valid_moves.append(move)
         return valid_moves
 
@@ -105,12 +102,17 @@ class GameState:
         print("Board :",
               " | ".join([str(stack.top()) for stack in self.board.stacks]))
 
-    def remainingCards(self):
+    def remaining_cards(self):
         total = 0
         for player in self.players:
             total += len(player.hand)
         total += len(self.board.draw_pile)
         return total
+
+    @staticmethod
+    def test_move(move):
+        delta = move.delta()
+        return delta == -10 or delta > 0
 
 
 class Move:
