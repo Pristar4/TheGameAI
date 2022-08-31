@@ -111,9 +111,6 @@ def do_turn(game, player):
             #     if _ == "f":
             #         break
 
-
-
-
         drawn = game.draw_hand(player)
         game.print_board()
         print(f"Draw {drawn} new Cards to Hand : {player.hand}")
