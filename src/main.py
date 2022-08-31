@@ -138,12 +138,14 @@ def input_move(game, player):
         # check if the card is in the hand
         if card not in hand:
             import logging
+
             logging.error(f"Hand does not contain the Card {card}!")
             continue
 
         stack_nr = int(input("Choose Stack (1..4): "))
         if stack_nr < 1 or stack_nr > 4:
             import logging
+
             logging.error(f"Invalid Stack Number {stack_nr}!")
             continue
         stack_nr = game.board.stacks[stack_nr - 1]
