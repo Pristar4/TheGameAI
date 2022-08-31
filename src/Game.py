@@ -27,8 +27,6 @@ class GameListener:
         raise NotImplementedError()
 
 
-
-
 class GameState:
 
     def __init__(self):
