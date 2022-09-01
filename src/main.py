@@ -105,11 +105,6 @@ def do_turn(game, player):
             if moves > 1:
                 if input("Continue? (y/n)") == "n":
                     return True
-            # if moves >= 2:
-            #
-            #     _ = input("Continue or Finish turn : ")
-            #     if _ == "f":
-            #         break
 
         drawn = game.draw_hand(player)
         game.print_board()
