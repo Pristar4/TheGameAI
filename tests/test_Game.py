@@ -1,4 +1,4 @@
-from Game import GameState, Move
+from Game import Move
 from main import create_game
 
 
