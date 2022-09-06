@@ -130,7 +130,6 @@ def input_move(game, player):
         # print the hand of the player
         print(f"Hand : {hand}")
         # input Card
-        # TODO loop until valid input
         try:
             value = int(input(f"{player.name} choose card value: "))
         except ValueError:

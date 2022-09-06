@@ -1,5 +1,3 @@
-You can find the Documentation at: https://pristar4.github.io/TheGameAI/
-
 
 
 # TheGame AI
