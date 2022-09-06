@@ -137,6 +137,7 @@ def input_move(game, player):
         # check if the card is in the hand
         if value not in range(1, 101):
             import logging
+
             logging.error(f"Card {value} is not in range 1-100!")
             continue
         card = Card(value)
