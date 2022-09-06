@@ -13,7 +13,7 @@ def main():
     games = []
     best = 100
     for i in range(2, 2 + 1):
-        game = create_game(i, 2)
+        game = create_game(i, 1, 1)
         run_game(game)
         games.append(game)
         best = min(best, game.remaining_cards())
@@ -101,7 +101,7 @@ def do_turn(game, player):
             game.print_board()
             move = input_move(game, player)
             game.execute_move(move)
-            # Check if the player made two or more moves then ask if he wants
+            # Check if the player made two or more moves than ask if he wants
             # to continue
             if moves > 1 and input("Continue? (y/n)") == "n":
                 return True
@@ -129,9 +129,18 @@ def input_move(game, player):
         print(f"Hand : {hand}")
         # input Card
         # TODO loop until valid input
-
-        card = Card(int(input(f"{player.name} choose card value: ")))
+        try:
+            value = int(input(f"{player.name} choose card value: "))
+        except ValueError:
+            print("Invalid input")
+            continue
         # check if the card is in the hand
+        if value not in range(1, 101):
+            import logging
+            logging.error(f"Card {value} is not in range 1-100!")
+            continue
+        card = Card(value)
+
         if card not in hand.list:
             import logging
 
