@@ -103,9 +103,8 @@ def do_turn(game, player):
             game.execute_move(move)
             # Check if the player made two or more moves then ask if he wants
             # to continue
-            if moves > 1:
-                if input("Continue? (y/n)") == "n":
-                    return True
+            if moves > 1 and input("Continue? (y/n)") == "n":
+                return True
 
         drawn = game.draw_hand(player)
         game.print_board()
