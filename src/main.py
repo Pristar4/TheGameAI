@@ -13,7 +13,7 @@ def main():
     games = []
     best = 100
     for i in range(2, 2 + 1):
-        game = create_game(i, 2)
+        game = create_game(i, 1, 1)
         run_game(game)
         games.append(game)
         best = min(best, game.remaining_cards())
@@ -101,7 +101,7 @@ def do_turn(game, player):
             game.print_board()
             move = input_move(game, player)
             game.execute_move(move)
-            # Check if the player made two or more moves then ask if he wants
+            # Check if the player made two or more moves than ask if he wants
             # to continue
             if moves > 1 and input("Continue? (y/n)") == "n":
                 return True
@@ -125,24 +125,30 @@ def input_move(game, player):
     hand: Hand = player.hand
 
     while True:
+        import logging
+
         # print the hand of the player
         print(f"Hand : {hand}")
         # input Card
         # TODO loop until valid input
-
-        card = Card(int(input(f"{player.name} choose card value: ")))
+        try:
+            value = int(input(f"{player.name} choose card value: "))
+        except ValueError:
+            print("Invalid input")
+            continue
         # check if the card is in the hand
-        if card not in hand.list:
-            import logging
+        if value not in range(1, 101):
+            logging.error("Card %s is not in range 1-100!", value)
+            continue
+        card = Card(value)
 
-            logging.error(f"Hand does not contain the Card {card}!")
+        if card not in hand.list:
+            logging.error(f"Hand does not contain the Card %s!", card)
             continue
 
         stack_nr = int(input("Choose Stack (1..4): "))
         if stack_nr < 1 or stack_nr > 4:
-            import logging
-
-            logging.error(f"Invalid Stack Number {stack_nr}!")
+            logging.error(f"Invalid Stack Number %s!", stack_nr)
             continue
         stack_nr = game.board.stacks[stack_nr - 1]
         move = Move(player, card, stack_nr)
