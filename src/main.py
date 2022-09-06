@@ -13,7 +13,7 @@ def main():
     games = []
     best = 100
     for i in range(2, 2 + 1):
-        game = create_game(i, 1, 1)
+        game = create_game(i, 2)
         run_game(game)
         games.append(game)
         best = min(best, game.remaining_cards())
@@ -101,7 +101,7 @@ def do_turn(game, player):
             game.print_board()
             move = input_move(game, player)
             game.execute_move(move)
-            # Check if the player made two or more moves than ask if he wants
+            # Check if the player made two or more moves then ask if he wants
             # to continue
             if moves > 1 and input("Continue? (y/n)") == "n":
                 return True
