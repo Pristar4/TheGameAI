@@ -101,7 +101,8 @@ def do_turn(game, player):
             game.print_board()
             move = input_move(game, player)
             game.execute_move(move)
-            # Check if the player made two or more moves then ask if he wants to continue
+            # Check if the player made two or more moves then ask if he wants
+            # to continue
             if moves > 1:
                 if input("Continue? (y/n)") == "n":
                     return True
@@ -128,11 +129,11 @@ def input_move(game, player):
         # print the hand of the player
         print(f"Hand : {hand}")
         # input Card
-        # TODO loop until valid input33
+        # TODO loop until valid input
 
         card = Card(int(input(f"{player.name} choose card value: ")))
         # check if the card is in the hand
-        if card not in hand:
+        if card not in hand.list:
             import logging
 
             logging.error(f"Hand does not contain the Card {card}!")
