@@ -70,6 +70,10 @@ def run_game(game):
     game.listener.game_over(game)
 
 
+def player_cant_play(game, player):
+    return len(game.find_valid_moves(player)) == 0
+
+
 def do_turn(game, player):
     """Do a turn for the player in the game
 
@@ -93,18 +97,27 @@ def do_turn(game, player):
         moves = 0
         while len(player.hand) > 0:
 
-            if len(game.find_valid_moves(player)) == 0:
+            # Check if the player made two or more moves then ask if he wants
+            # to continue
+            if moves > 1:
+                continueInput = input("Continue (y/n) ?");
+                if (continueInput == "n"):
+                    print("END TURN")
+                    break
+                elif continueInput != "y":
+                    continue
+
+            if player_cant_play(game, player):
                 return True
 
-            moves += 1
             print(f"-- move {moves} --")
             game.print_board()
             move = input_move(game, player)
-            game.execute_move(move)
-            # Check if the player made two or more moves then ask if he wants
-            # to continue
-            if moves > 1 and input("Continue? (y/n)") == "n":
-                return True
+            if move is not None:
+                moves += 1
+                game.execute_move(move)
+
+                # return True
 
         drawn = game.draw_hand(player)
         game.print_board()
@@ -134,7 +147,7 @@ def input_move(game, player):
             value = int(input(f"{player.name} choose card value: "))
         except ValueError:
             print("Invalid input")
-            continue
+            return None
         # check if the card is in the hand
         if value not in range(1, 101):
             logging.error("Card %s is not in range 1-100!", value)
