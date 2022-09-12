@@ -100,7 +100,7 @@ def do_turn(game, player):
             # Check if the player made two or more moves then ask if he wants
             # to continue
             if moves > 1:
-                continue_input = input("Continue (y/n) ?");
+                continue_input = input("Continue (y/n) ?")
                 if continue_input == "n":
                     print("END TURN")
                     break
