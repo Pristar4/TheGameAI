@@ -104,7 +104,7 @@ def do_turn(game, player):
                 if continue_input == "n":
                     print("END TURN")
                     break
-                elif continue_input != "y":
+                if continue_input != "y":
                     continue
 
             if player_cant_play(game, player):
